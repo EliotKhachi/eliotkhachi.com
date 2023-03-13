@@ -1,21 +1,24 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, ImageBackground } from "react-native";
+import { StyleSheet, View, Text, Dimensions } from "react-native";
 import Navbar from "./src/components/Navbar";
 import Home from "./src/components/Home/Home";
-let backgroundImageSource: any = require("./assets/southern-ring-nebula-2-_custom-60c7d16d9c36f085646be2dad4585892c783952d.jpg");
+import StarryNight from "./src/components/StarryNight"
 
 export default function App() {
   return (
-    <ImageBackground style={styles.container} source={backgroundImageSource}>
+    <View style={styles.container}>
+      <StarryNight />
       <Navbar />
       <Home />
-    </ImageBackground>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     width: "100%",
+    height: "100%",
+    overflow: "hidden",
+    backgroundImage:
+      "radial-gradient(ellipse at bottom, #1b2735, #090a0f 100%)",
   },
-});
+ }) 
