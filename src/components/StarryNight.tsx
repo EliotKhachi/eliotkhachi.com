@@ -11,24 +11,26 @@ import Animated, {
   Keyframe,
   Transition,
   SlideInDown,
-  FadeIn
+  FadeIn,
 } from "react-native-reanimated";
 import React from "react";
 
-const starSize: number[] = [1, 2, 3];
 const screenDimensions = Dimensions.get("screen");
-const numberOfStars: number = screenDimensions.width / 5;
+const starSize: number[] = [1, 2, 3]; // constrain to only 3 elements
 const starSpeed = 3;
+const numberOfStars: number = screenDimensions.width/5;
+const animationDuration = 30000 / starSpeed;
+const transitionDuration = 1000;
 
 const keyframe = new Keyframe({
   from: {
-    transform:[{translateY: 0}]
+    transform: [{ translateY: 0 }],
   },
   to: {
-    transform: [{translateY: 1000}],
-    easing: Easing.linear
-  }
-})
+    transform: [{ translateY: 1000 }],
+    easing: Easing.linear,
+  },
+});
 
 function generateStars() {
   // Create empty 2d array
@@ -37,16 +39,27 @@ function generateStars() {
     let stars = [];
     myStars.push(stars);
   }
-  // Generate random size and position of stars. Place stars on each row of the 2d array according to their size.
-  for (let i = 0; i < numberOfStars; i++) {
-    let s: number = Math.floor(Math.random() * starSize.length); // randomly pick star size index from starSize array
+  let count = 0;
+  // generate big stars
+  for (let i = 0; i < (1 / 9) * numberOfStars; i++) {
     let x: number = Math.random() * screenDimensions.width; // randomly pick width: 0 < w < windowDimensions.width
-    let y: number = Math.random() * screenDimensions.height; // randomly pick height: 0 < h < windowDimensions.height
-    for (let j = 0; j < starSize.length; j++) {
-      if (s == j) {
-        myStars[j].push({ id: i, s, x, y });
-      }
-    }
+    let y = Math.random() * screenDimensions.height; // randomly pick height: 0 < h < windowDimensions.height
+    myStars[2].push({ id: count, s: 2, x, y });
+    count++;
+  }
+  // generate medium stars
+  for (let i = 0; i < (3 / 9) * numberOfStars; i++) {
+    let x: number = Math.random() * screenDimensions.width; 
+    let y = Math.random() * screenDimensions.height * starSpeed;  // randomly pick height: 0 < h < windowDimensions.height*starSpeed
+    myStars[1].push({ id: count, s: 1, x, y });
+    count++;
+  }
+  // generate small stars
+  for (let i = 0; i < (5 / 9) * numberOfStars; i++) {
+    let x: number = Math.random() * screenDimensions.width; 
+    let y = Math.random() * screenDimensions.height * starSpeed;  // randomly pick height: 0 < h < windowDimensions.height*starSpeed
+    myStars[0].push({ id: count, s: 0, x, y });
+    count++;
   }
   // return the 2d array of stars
   return myStars;
@@ -60,14 +73,23 @@ export default function StarryNight() {
 
   const animatedStyles1 = useAnimatedStyle(() => {
     return {
-      transform: [{ translateY: -200 * translationY.value * starSpeed }],
+      transform: [
+        {
+          translateY:
+            (-starSpeed / 2) * screenDimensions.height * translationY.value,
+        },
+      ],
       opacity: opacity.value,
       useNativeDriver: true,
     };
   });
   const animatedStyles2 = useAnimatedStyle(() => {
     return {
-      transform: [{ translateY: -100 * translationY.value * starSpeed }],
+      transform: [
+        {
+          translateY: -starSpeed * screenDimensions.height * translationY.value,
+        },
+      ],
       opacity: opacity.value,
       useNativeDriver: true,
     };
@@ -76,15 +98,18 @@ export default function StarryNight() {
   React.useEffect(() => {
     translationY.value = withRepeat(
       withSequence(
-        withTiming(1, { duration: 4000, easing: Easing.linear }),
+        withTiming(1, { duration: animationDuration, easing: Easing.linear }),
         withTiming(0, { duration: 0, easing: Easing.linear })
       ),
       -1
     );
     opacity.value = withRepeat(
       withSequence(
-        withTiming(1, { duration: 2000}),
-        withDelay(0, withTiming(0, { duration: 2000}))
+        withTiming(1, { duration: transitionDuration }),
+        withDelay(
+          animationDuration - 2 * transitionDuration,
+          withTiming(0, { duration: transitionDuration })
+        )
       ),
       -1
     );
@@ -118,9 +143,6 @@ export default function StarryNight() {
           ))}
         </Animated.View>
       ))}
-            {/* <Animated.View entering={SlideInDown} style={styles.stars1}></Animated.View>
-      <Animated.View entering={FadeIn.duration(2000)} style={[styles.stars2]}></Animated.View> */}
-
     </View>
   );
 }
@@ -131,6 +153,5 @@ const styles = StyleSheet.create({
   },
   stars: {
     position: "absolute",
-    top: -200,
   },
-}) 
+});

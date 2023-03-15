@@ -1,33 +1,44 @@
 import { StyleSheet, View, Text, ImageBackground, Image } from "react-native";
 import React from "react";
+import AboutMe from "../AboutMe/AboutMe";
+import StarryNight from "../StarryNight";
+import Navbar from "../Navbar";
+
 let portraitImageSource: any = require("../../../assets/0J0A7154-headshot.jpg");
+const portraitSize = 400;
 
 export default function Home() {
   return (
-    <View>
-      <View style={{}}></View>
-      <View style={{ flexDirection: "row", justifyContent: "flex-start" }}>
+    <View style={styles.home}>
+      <StarryNight />
+      <Navbar />
+      <View style={styles.about}>
         <Image style={styles.portrait} source={portraitImageSource} />
-        <View style={styles.aboutMe}></View>
+        <AboutMe />
       </View>
     </View>
   );
 }
 const styles = StyleSheet.create({
+  home: {
+    flex: 1,
+    justifyContent: "flex-start",
+    flexDirection: "column",
+    overflow: "hidden",
+    backgroundImage:
+      "radial-gradient(ellipse at bottom, #1b2735, #090a0f 100%)",
+  },
+  about: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+  },
   portrait: {
-    width: 400,
-    height: 400,
-    borderRadius: 400,
+    width: portraitSize,
+    height: portraitSize,
+    borderRadius: portraitSize,
     aspectRatio: 1,
     borderWidth: 2,
-    borderColor: "gray",
-    transform: [{ rotate: "0deg" }],
-    // filter: "grayscale(100%)"
-  },
-  aboutMe: {
-    width: 600,
-    height: 800,
-    backgroundColor: "black",
-    borderRadius: 100,
+    borderColor: "white",
   },
 });

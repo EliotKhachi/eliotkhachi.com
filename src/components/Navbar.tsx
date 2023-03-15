@@ -1,9 +1,17 @@
 import React from "react";
 import { StyleSheet, View, Text, TouchableHighlight } from "react-native";
+import { useFonts, AbrilFatface_400Regular } from "@expo-google-fonts/dev";
 
-const buttons: String[] = ["Resume", "Projects", "Zettelkasten", "Contact Me"];
+
+
+// const buttons: String[] = ["Resume", "Projects", "Zettelkasten", "Contact Me"];
+const buttons: String[] = [];
 
 export default function Navbar() {
+let [fontsLoaded] = useFonts({
+    AbrilFatface_400Regular,
+  });
+
   const [isHovered, setIsHovered] = React.useState(false);
   const [isPressed, setIsPressed] = React.useState(false);
 
@@ -17,7 +25,7 @@ export default function Navbar() {
         <Text
           style={[styles.homeText, { color: isPressed ? "white" : "gray" }]}
         >
-          Eliot Khachi
+         EK 
         </Text>
       </TouchableHighlight>
       <View style={styles.navbar}>
@@ -64,7 +72,7 @@ const styles = StyleSheet.create({
     marginLeft: 80,
   },
   homeText: {
-    fontSize: 22,
-    // letterSpacing: 4
+    fontSize: 50,
+    fontFamily:"AbrilFatFace_400Regular"
   },
 });
