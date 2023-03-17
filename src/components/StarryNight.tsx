@@ -117,7 +117,7 @@ export default function StarryNight() {
 
   let count = 0;
   return (
-    <View>
+    <View >
       {myStars.map((stars) => (
         <Animated.View
           key={count++}

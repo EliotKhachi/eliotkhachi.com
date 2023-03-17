@@ -2,16 +2,16 @@ import { StyleSheet, View, Text, ImageBackground, Image } from "react-native";
 import React from "react";
 import AboutMe from "../AboutMe/AboutMe";
 import StarryNight from "../StarryNight";
-import Navbar from "../Navbar";
+import Navbar from "../Navbar/Navbar";
 
 let portraitImageSource: any = require("../../../assets/0J0A7154-headshot.jpg");
-const portraitSize = 400;
+const portraitSize: number = 400;
 
-export default function Home() {
+export default function Home({navigation}) {
   return (
     <View style={styles.home}>
       <StarryNight />
-      <Navbar />
+      <Navbar navigation={navigation} />
       <View style={styles.about}>
         <Image style={styles.portrait} source={portraitImageSource} />
         <AboutMe />
@@ -25,8 +25,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     flexDirection: "column",
     overflow: "hidden",
-    backgroundImage:
-      "radial-gradient(ellipse at bottom, #1b2735, #090a0f 100%)",
+    backgroundImage: "radial-gradient(ellipse at bottom, #1b2735, #090a0f 100%)",
   },
   about: {
     flexDirection: "row",
