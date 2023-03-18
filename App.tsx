@@ -3,10 +3,9 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "./src/components/Home/Home";
-import Projects from "./src/components/Projects/Projects";
+import Portfolio from "./src/components/Portfolio/Portfolio"
 import ContactMe from "./src/components/ContactMe/ContactMe";
 import Zettelkasten from "./src/components/Zettelkasten/Zettelkasten";
-import Resume from "./src/components/Resume/Resume";
 
 import * as Linking from "expo-linking";
 
@@ -22,8 +21,7 @@ export default function App() {
     ],
     config: {
       screens: {
-        home: "/",
-        projects: "projects",
+        "Eliot Khachi": "/",
       },
     },
   };
@@ -31,17 +29,17 @@ export default function App() {
     <NavigationContainer linking={linking} fallback={<Text>Loading...</Text>}>
       <Stack.Navigator>
         <Stack.Screen
-          name="home"
+          name="Eliot Khachi"
           component={Home}
           options={{ headerShown: false }}
         ></Stack.Screen>
         <Stack.Screen
-          name="projects"
-          component={Projects}
+          name="portfolio"
+          component={Portfolio}
           options={{ headerShown: false }}
         ></Stack.Screen>
         <Stack.Screen
-          name="contact me"
+          name="contactme"
           component={ContactMe}
           options={{ headerShown: false }}
         ></Stack.Screen>
@@ -50,12 +48,7 @@ export default function App() {
           component={Zettelkasten}
           options={{ headerShown: false }}
         ></Stack.Screen>
-        <Stack.Screen
-          name="resume"
-          component={Resume}
-          options={{ headerShown: false }}
-        ></Stack.Screen>
-      </Stack.Navigator>
+              </Stack.Navigator>
     </NavigationContainer>
   );
 }

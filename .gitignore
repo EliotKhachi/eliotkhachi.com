@@ -3,15 +3,16 @@
 node_modules/
 .expo/
 assets/
+publish.sh
 dist/
 npm-debug.*
+web-build/
 *.jks
 *.p8
 *.p12
 *.key
 *.mobileprovision
 *.orig.*
-web-build/
 
 # macOS
 .DS_Store

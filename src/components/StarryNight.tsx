@@ -42,7 +42,7 @@ function generateStars() {
   let count = 0;
   // generate big stars
   for (let i = 0; i < (1 / 9) * numberOfStars; i++) {
-    let x: number = Math.random() * screenDimensions.width; // randomly pick width: 0 < w < windowDimensions.width
+    let x: number = Math.random() * screenDimensions.width*0.98; // randomly pick width: 0 < w < windowDimensions.width
     let y = Math.random() * screenDimensions.height; // randomly pick height: 0 < h < windowDimensions.height
     myStars[2].push({ id: count, s: 2, x, y });
     count++;
@@ -117,7 +117,7 @@ export default function StarryNight() {
 
   let count = 0;
   return (
-    <View >
+    <View style={{ position: "absolute", width: "100%", height: "100%", overflow: "hidden"}}>
       {myStars.map((stars) => (
         <Animated.View
           key={count++}
