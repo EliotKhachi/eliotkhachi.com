@@ -30,6 +30,7 @@ export default function MyLink({ name, onPress, navigation, style}) {
 const styles = StyleSheet.create({
   link: {
     marginHorizontal: 20,
+    padding:10, 
   },
   text: {
     fontSize: 18,
@@ -41,7 +42,7 @@ const styles = StyleSheet.create({
     padding: 20,
     borderRadius: 10,
     marginRight: 40,
-    marginLeft: 90,
+    marginLeft: 40,
   },
   contactMeText: {
     fontSize: 18,

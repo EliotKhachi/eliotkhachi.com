@@ -29,9 +29,6 @@ export default function AboutMe() {
 const styles = StyleSheet.create({
   aboutMe: {
     textAlign: "center",
-    // width: 450,
-    // justifyContent: "center",
-    // alignItems: "center",
   },
   header: {
     numberOfLines: 1,

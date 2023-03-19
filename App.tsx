@@ -33,7 +33,7 @@ export default function App() {
           component={Home}
           options={{ headerShown: false }}
         ></Stack.Screen>
-        <Stack.Screen
+        {/* <Stack.Screen
           name="portfolio"
           component={Portfolio}
           options={{ headerShown: false }}
@@ -47,7 +47,7 @@ export default function App() {
           name="zettelkasten"
           component={Zettelkasten}
           options={{ headerShown: false }}
-        ></Stack.Screen>
+        ></Stack.Screen> */}
               </Stack.Navigator>
     </NavigationContainer>
   );

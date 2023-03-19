@@ -3,13 +3,16 @@ import {
   StyleSheet,
   View,
   Text,
-  Image,
-  Pressable,
   useWindowDimensions,
   TouchableOpacity,
   FlatList,
   SafeAreaView,
 } from "react-native";
+import Animated, {
+  withTiming,
+  useSharedValue,
+  useAnimatedStyle,
+} from "react-native-reanimated";
 import * as Linking from "expo-linking";
 import { A } from "@expo/html-elements";
 import { useFonts, AbrilFatface_400Regular } from "@expo-google-fonts/dev";
@@ -23,6 +26,8 @@ const COLOR = "#c7d0e8";
 export default function Navbar({ navigation }) {
   const [toggled, setToggled] = React.useState(false);
   const [device, setDevice] = React.useState("");
+  const dropDownX = useSharedValue(0);
+
   let [fontsLoaded] = useFonts({
     AbrilFatface_400Regular,
   });
@@ -30,17 +35,26 @@ export default function Navbar({ navigation }) {
   const windowSize = useWindowDimensions();
 
   React.useEffect(() => {
-    if (windowSize.width < 1000) setDevice("phone");
+    if (windowSize.width < 640) setDevice("tiny");
+    else if (windowSize.width < 1000) setDevice("phone");
     else if (windowSize.width < 1300) setDevice("tablet");
     else setDevice("desktop");
   }, [windowSize]);
 
+  const handlePress = () => {
+    setToggled(!toggled);
+    dropDownX.value = withTiming(1, { duration: 300 });
+  };
+
+  const moveDropDown = useAnimatedStyle(() => {
+    return {
+      transform: [{ translateX: dropDownX.value }],
+    };
+  });
+
   return (
     <View style={styles.navbar}>
-      <A
-        style={[{ marginLeft: 40 }]}
-        href="https://www.eliotkhachi.com"
-      >
+      <A style={[{ marginLeft: 30 }]} href="https://www.eliotkhachi.com">
         <Text style={[styles.homeText]}>EK</Text>
       </A>
       <View style={styles.externalLinks}>
@@ -48,7 +62,7 @@ export default function Navbar({ navigation }) {
           <A href="https://github.com/EliotKhachi">
             <GithubIcon size={60} />
           </A>
-          {device == "tablet" || device == "phone" ? null : (
+          {device == "tiny" ? null : (
             <A href="https://github.com/EliotKhachi">
               <Text
                 style={{
@@ -68,7 +82,7 @@ export default function Navbar({ navigation }) {
           <A href="https://www.linkedin.com/in/eliot-khachi-426424159/">
             <LinkedInIcon size={50} />
           </A>
-          {device == "tablet" || device == "phone" ? null : (
+          {device == "tiny" ? null : (
             <A href="https://www.linkedin.com/in/eliot-khachi-426424159/">
               <Text
                 style={{
@@ -86,8 +100,8 @@ export default function Navbar({ navigation }) {
         </View>
       </View>
 
-      {/* <View style={styles.myLinks}>
-        {device == "desktop" || device == "tablet" ? (
+      <View style={styles.myLinks}>
+        {device == "desktop" ? (
           links.map((item) => (
             <MyLink
               key={links.indexOf(item)}
@@ -98,37 +112,48 @@ export default function Navbar({ navigation }) {
             />
           ))
         ) : (
-          <View style={{ position: "relative" }}>
+          <View style={{ position: "absolute", top: -25 }}>
             <TouchableOpacity
               style={[styles.hamburger]}
-              onPress={() => setToggled(!toggled)}
+              onPress={() => handlePress()}
             >
               <View style={styles.burgerLines}></View>
               <View style={styles.burgerLines}></View>
               <View style={styles.burgerLines}></View>
             </TouchableOpacity>
-            {toggled ? (
-              <SafeAreaView>
-                <FlatList
-                  data={links}
-                  renderItem={({ item }) => (
-                    <MyLink
-                      onPress={() => {
-                        setToggled(!toggled);
-                        navigation.navigate(item.valueOf().toLowerCase());
-                      }}
-                      style={null}
-                      name={item}
-                      navigation={navigation}
-                    />
-                  )}
-                  keyExtractor={(item) => item}
-                />
-              </SafeAreaView>
-            ) : null}
+            <Animated.View style={[moveDropDown, {marginTop: 20, marginRight: 20}]}>
+              {toggled ? (
+                <SafeAreaView
+                  style={[
+                    {
+                      backgroundColor: "#151E29",
+                      borderRadius: 8,
+                      borderWidth: 1,
+                      borderColor: "white",
+                    },
+                  ]}
+                >
+                  <FlatList
+                    data={links}
+                    renderItem={({ item }) => (
+                      <MyLink
+                        onPress={() => {
+                          setToggled(!toggled);
+                          navigation.navigate(item.valueOf().toLowerCase());
+                        }}
+                        style={null}
+                        name={item}
+                        navigation={navigation}
+                      />
+                    )}
+                    keyExtractor={(item) => item}
+                  />
+                </SafeAreaView>
+              ) : null}
+            </Animated.View>
           </View>
-        )} */}
-      {/* </View> */}
+        )}
+      </View>
     </View>
   );
 }
@@ -136,10 +161,11 @@ export default function Navbar({ navigation }) {
 const styles = StyleSheet.create({
   navbar: {
     width: "100%",
+    height: 100,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-around",
-    padding: 10,
+    // padding: 10,
   },
   externalLinks: {
     flexDirection: "row",
@@ -150,7 +176,8 @@ const styles = StyleSheet.create({
   myLinks: {
     flexDirection: "row",
     justifyContent: "flex-end",
-    alignItems: "center",
+    alignItems: "flex-start",
+    marginLeft: 80
   },
   homeText: {
     fontSize: 50,
@@ -161,6 +188,8 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     padding: 5,
     borderRadius: 4,
+    alignSelf: "flex-end",
+    marginRight: 20,
   },
   burgerLines: {
     width: 40,
