@@ -2,9 +2,9 @@ import { StyleSheet, View, Text, Dimensions } from "react-native";
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Home from "./src/components/Home/Home";
+import Home from "./src/components/Home";
 import Portfolio from "./src/components/Portfolio/Portfolio"
-import ContactMe from "./src/components/ContactMe/ContactMe";
+import ContactMe from "./src/components/ContactMe";
 import Zettelkasten from "./src/components/Zettelkasten/Zettelkasten";
 
 import * as Linking from "expo-linking";

@@ -4,6 +4,7 @@ import { LinearGradient } from "expo-linear-gradient";
 
 import React from "react";
 
+const COLOR = "#c7d0e8";
 export default function AboutMe() {
   const windowSize = useWindowDimensions();
   let [fontsLoaded] = useFonts({

@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  StyleSheet,
-  View,
-  Text,
-  useWindowDimensions,
-} from "react-native";
+import { StyleSheet, View, Text, useWindowDimensions } from "react-native";
 import Animated, {
   withTiming,
   useSharedValue,
@@ -48,8 +43,11 @@ export default function Navbar({ navigation }) {
 
   return (
     <View style={styles.navbar}>
-      <A style={[styles.home, {left: device == "tiny" ? 40 : 80}]} href="https://www.eliotkhachi.com">
-        <Text style={[styles.homeText]}>EK</Text>
+      <A
+        style={[styles.home, { left: device == "tiny" ? 40 : 80 }]}
+        href="https://www.eliotkhachi.com"
+    >
+        <Text style={[styles.homeText, {fontSize: device == "tiny" ? 42 : 50}]}>EK</Text>
       </A>
       {/* Include buttons that scroll to (SPA Single Page Application design)
       Education
@@ -57,7 +55,7 @@ export default function Navbar({ navigation }) {
       Projects 
       Professional Experience (Resume)
       */}
-     {/* <Hamburger/>  */}
+      {/* <Hamburger/>  */}
     </View>
   );
 }
@@ -73,11 +71,14 @@ const styles = StyleSheet.create({
   },
   home: {
     position: "absolute",
-    left: 80
+    left: 80,
   },
   homeText: {
     fontSize: 50,
     fontFamily: "AbrilFatFace_400Regular",
-    color: COLOR,
+    backgroundImage: "linear-gradient(to bottom, white, #38495a)",
+    WebkitBackgroundClip: "text",
+    WebkitTextFillColor: "transparent",
+    textAlign: "center",
   },
-    });
+});

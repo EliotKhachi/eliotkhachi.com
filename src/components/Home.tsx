@@ -8,13 +8,15 @@ import {
   useWindowDimensions,
 } from "react-native";
 import React from "react";
-import AboutMe from "../AboutMe/AboutMe";
-import StarryNight from "../StarryNight";
-import Navbar from "../Navbar/Navbar";
+import AboutMe from "./AboutMe";
+import ContactMe from "./ContactMe";
+import StarryNight from "./StarryNight";
+import Navbar from "./Navbar/Navbar";
 
-let portraitImageSource: any = require("../../../assets/headshot/0J0A7154-headshot.jpg");
+let portraitImageSource: any = require("../../assets/headshot/0J0A7154-headshot.jpg");
 const screenDimensions = Dimensions.get("screen");
 let portraitSize: number;
+const COLOR = "#c7d0e8";
 
 export default function Home({ navigation }) {
   const windowSize = useWindowDimensions();
@@ -22,6 +24,7 @@ export default function Home({ navigation }) {
   portraitSize = screenDimensions.width < 1000 ? screenDimensions.width*0.80 : screenDimensions.width * 0.25;
 
 React.useEffect(() => {
+  console.log(windowSize);
     if (windowSize.width < 1000) setDevice("phone");
     else if (windowSize.width < 1300) setDevice("tablet");
     else setDevice("desktop");
@@ -44,6 +47,10 @@ React.useEffect(() => {
           source={portraitImageSource}
         />
         <AboutMe />
+        <View style={{height: 1000}}>
+
+        </View>
+        <ContactMe />
       </View>
     </View>
   );
@@ -51,11 +58,10 @@ React.useEffect(() => {
 
 const styles = StyleSheet.create({
   home: {
-    flex: 1,
+    position: "absolute",
     width: "100%",
     justifyContent: "flex-start",
     flexDirection: "column",
-    overflow: "scroll",
     backgroundImage:
       "radial-gradient(ellipse at bottom, #1b2735, #090a0f 100%)",
   },

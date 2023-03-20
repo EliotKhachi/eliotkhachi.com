@@ -18,19 +18,9 @@ import React from "react";
 const screenDimensions = Dimensions.get("screen");
 const starSize: number[] = [1, 2, 3]; // constrain to only 3 elements
 const starSpeed = 3;
-const numberOfStars: number = screenDimensions.width/5;
+const numberOfStars: number = screenDimensions.height/3;
 const animationDuration = 30000 / starSpeed;
 const transitionDuration = 1000;
-
-const keyframe = new Keyframe({
-  from: {
-    transform: [{ translateY: 0 }],
-  },
-  to: {
-    transform: [{ translateY: 1000 }],
-    easing: Easing.linear,
-  },
-});
 
 function generateStars() {
   // Create empty 2d array
@@ -43,21 +33,21 @@ function generateStars() {
   // generate big stars
   for (let i = 0; i < (1 / 9) * numberOfStars; i++) {
     let x: number = Math.random() * screenDimensions.width*0.98; // randomly pick width: 0 < w < windowDimensions.width
-    let y = Math.random() * screenDimensions.height; // randomly pick height: 0 < h < windowDimensions.height
+    let y = Math.random() * screenDimensions.height*2; // randomly pick height: 0 < h < windowDimensions.height
     myStars[2].push({ id: count, s: 2, x, y });
     count++;
   }
   // generate medium stars
   for (let i = 0; i < (3 / 9) * numberOfStars; i++) {
     let x: number = Math.random() * screenDimensions.width; 
-    let y = Math.random() * screenDimensions.height * starSpeed;  // randomly pick height: 0 < h < windowDimensions.height*starSpeed
+    let y = Math.random() * screenDimensions.height*2 * starSpeed;  // randomly pick height: 0 < h < windowDimensions.height*starSpeed
     myStars[1].push({ id: count, s: 1, x, y });
     count++;
   }
   // generate small stars
   for (let i = 0; i < (5 / 9) * numberOfStars; i++) {
     let x: number = Math.random() * screenDimensions.width; 
-    let y = Math.random() * screenDimensions.height * starSpeed;  // randomly pick height: 0 < h < windowDimensions.height*starSpeed
+    let y = Math.random() * screenDimensions.height*2 * starSpeed;  // randomly pick height: 0 < h < windowDimensions.height*starSpeed
     myStars[0].push({ id: count, s: 0, x, y });
     count++;
   }
@@ -76,7 +66,7 @@ export default function StarryNight() {
       transform: [
         {
           translateY:
-            (-starSpeed / 2) * screenDimensions.height * translationY.value,
+            (-starSpeed) * screenDimensions.height * translationY.value,
         },
       ],
       opacity: opacity.value,
@@ -87,7 +77,7 @@ export default function StarryNight() {
     return {
       transform: [
         {
-          translateY: -starSpeed * screenDimensions.height * translationY.value,
+          translateY: -starSpeed / 2* screenDimensions.height * translationY.value,
         },
       ],
       opacity: opacity.value,
