@@ -9,9 +9,9 @@ import { A } from "@expo/html-elements";
 import { Linking } from "react-native";
 import React from "react";
 
-import LinkedInIcon from "../../assets/icons/LinkedInIcon";
-import GithubIcon from "../../assets/icons/GithubIcon";
-import MailIcon from "../../assets/icons/MailIcon";
+import LinkedInIcon from "./SVG/icons/LinkedInIcon";
+import GithubIcon from "./SVG/icons/GithubIcon";
+import MailIcon from "./SVG/icons/MailIcon";
 
 const COLOR = "#c7d0e8";
 export default function ContactMe() {
@@ -43,7 +43,6 @@ const styles = StyleSheet.create({
     flex: 1,
     width: 200,
     flexDirection: "row",
-    // alignitems:"center",
     justifyContent: "space-between",
   },
 });
