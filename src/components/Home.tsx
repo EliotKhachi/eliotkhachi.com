@@ -12,6 +12,7 @@ import AboutMe from "./AboutMe";
 import ContactMe from "./ContactMe";
 import StarryNight from "./StarryNight";
 import Navbar from "./Navbar/Navbar";
+import Crosshair from "./Crosshair"
 
 let portraitSize: number;
 const COLOR = "#c7d0e8";

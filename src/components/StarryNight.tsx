@@ -10,7 +10,7 @@ import Animated, {
 } from "react-native-reanimated";
 import { PanGestureHandler } from "react-native-gesture-handler";
 import React from "react";
-import Crosshair from "./Crosshair"
+import Crosshair from "./Crosshair";
 
 const screenDimensions = Dimensions.get("screen");
 const starSize: number[] = [1, 2, 3]; // constrain to only 3 elements
@@ -114,7 +114,6 @@ export default function StarryNight() {
         overflow: "hidden",
       }}
     >
-      <Crosshair />
       {myStars.map((stars) => (
         <Animated.View
           key={count++}
@@ -127,6 +126,7 @@ export default function StarryNight() {
               : animatedStyles1,
           ]}
         >
+          {/* <Crosshair /> */}
           {stars.map((star) => (
             <View
               key={star.id}
