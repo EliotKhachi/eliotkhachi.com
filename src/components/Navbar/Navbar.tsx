@@ -45,7 +45,7 @@ export default function Navbar() {
     <View style={styles.navbar}>
       <A
         style={[styles.home, { left: device == "tiny" ? 40 : 80 }]}
-        href="https://www.eliotkhachi.com"
+        href="https://www.eliotkhachi.dev"
     >
         <Text style={[styles.homeText, {fontSize: device == "tiny" ? 42 : 50}]}>EK</Text>
       </A>
