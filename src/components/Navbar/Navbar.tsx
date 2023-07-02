@@ -12,7 +12,7 @@ import Hamburger from "./Hamburger";
 const links = ["Portfolio", "Zettelkasten", "Contact Me"];
 const COLOR = "#c7d0e8";
 
-export default function Navbar({ navigation }) {
+export default function Navbar() {
   const [toggled, setToggled] = React.useState(false);
   const [device, setDevice] = React.useState("");
   const dropDownX = useSharedValue(0);

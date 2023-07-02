@@ -1,36 +1,36 @@
-import {
-  StyleSheet,
-  View,
-  Text,
-  ImageBackground,
-  Image,
-  Dimensions,
-  useWindowDimensions,
-} from "react-native";
+import { StyleSheet, ScrollView, View } from "react-native";
 import React from "react";
 import AboutMe from "./AboutMe";
 import ContactMe from "./ContactMe";
 import StarryNight from "./StarryNight";
 import Navbar from "./Navbar/Navbar";
-import Crosshair from "./Crosshair"
+import Crosshair from "./Crosshair";
 
 let portraitSize: number;
 const COLOR = "#c7d0e8";
 
-export default function Home({ navigation }) {
+export default function Home() {
   // const windowSize = useWindowDimensions();
 
   return (
-    <View style={styles.home}>
-      <StarryNight />
-      <Navbar navigation={navigation} />
-      <AboutMe />
-      <ContactMe />
-    </View>
+    <ScrollView
+      contentContainerStyle={styles.scrollViewContent}
+      horizontal={false}
+      showsHorizontalScrollIndicator={false}>
+      <View style={styles.home}>
+        <StarryNight />
+        <Navbar />
+        <AboutMe />
+        <ContactMe />
+      </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
+  scrollViewContent: {
+    flexGrow: 1,
+  },
   home: {
     flexDirection: "column",
     // position: "absolute",
